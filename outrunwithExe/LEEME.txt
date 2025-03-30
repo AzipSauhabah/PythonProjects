@@ -1,0 +1,45 @@
+Compatibilidad:
+ - Windows:
+	Sólo funciona en versiones de Windows modernas (7, 10) con arquitecturas de 64 bits.
+ - MacOS y Linux:
+	Se ha comprobado la compatibilidad del videojuego mediante WineHQ 5.0. Página de descarga: https://www.winehq.org/
+
+Instrucciones:
+	1- Descomprimir todo el contenido a una nueva carpeta.
+
+	2- Ejecutar Outrun.exe
+	
+Controles:
+	En el menú se selecciona con ENTER y se mueve con las FLECHAS.
+	
+	En el juego los controles son los establecidos en opciones de control.
+	Por defecto los controles son:
+		Acelerar: Ctrl Left
+		Frenar: Alt Left
+		Girar: Flechas
+		Pausa: Esc
+
+Opciones: (ENTER para confirmar)
+	Dificultad: (FLECHAS)
+		- Pacífica: Sin vehículos enemigos y con tiempo de sobra.
+		- Fácil: Con 5 vehículos enemigos simultáneos y con bastante tiempo.
+		- Normal: Con 10 vehículos enemigos simultáneos y con un tiempo ajustado.
+		- Difícil: Con 15 vehículos enemigos simultáneos y con un tiempo muy ajustado.
+	IA de los enemigos: (FLECHAS)
+		Activa o desactiva la IA de los enemigos, cuya dificultad dependerá de la dificultad del juego.
+	Menú de sonido: (C para entrar y ENTER para confirmar)
+		- Volumen de la música (FLECHAS).
+		- Volumen de los efectos (FLECHAS).
+	Menú de gráficos: (C para entrar y ENTER para confirmar)
+		- Resolución de pantalla (FLECHAS).
+		- Pixel art (FLECHAS). Si se desactiva en resoluciones muy altas, se necesita una CPU bastante potente.
+	Menú de controles: (C para entrar y ENTER para confirmar)
+		Para cambiar el control resaltado en amarillo se debe mantener ESPACIO y sin soltarlo puslar la tecla deseada, a continuación soltar espacio para confirmar.
+		
+Back doors:
+	A modo de depuración se ha habilitado una puerta trasera para empezar en el mapa que se quiera y añadir tiempo extra:
+		Se debe crear un fichero de texto plano con nombre "backdoor.info" (sin las comillas) dentro del directorio "resources".
+		Este archivo puede contener las líneas "MAP: X" y "TIME: Y", donde X es el número de mapa (1 a 15) e Y es el tiempo extra en segundos.
+		Ejemplo de fichero "backdoor.info":
+			MAP: 15
+			TIME: 60

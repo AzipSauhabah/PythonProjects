@@ -1,0 +1,37 @@
+Total hours spent: 36 hours
+
+Timeline:
+1. Before week 12: 8 hours
+   Study Pygame
+   Study sample files
+   Make small games like Breakout
+   Try to remake super mario during Hackathon
+   Write the kirby class for Term Project
+   Process the graphics
+   
+2. Week 12-13:  6 hours
+   Brainstorming ideas
+   Process the graphics
+   Finish background repetition
+   Add HandCursor class
+   Incorporate all classes together
+   
+3. Week 13-14: 10 hours
+   Add 4 enemies: shotzo, pikey, waddleDee, waddleDoo
+   Add invincible state for Kirby
+   Add double jump for Kirby
+   Add spark shield for Kirby
+   Finish 'Grab' feature for the hand cursor
+   Finish 'Fist' feature for the hand cursor
+   Design the menu
+   Incorporate the menu with the game
+   
+4. Week 14-15: 12 hours
+   Add 2 more enemies: bird and flame
+   Add background music for the game
+   Design the subscreen menu
+   Add "Throw" feature for the hand cursor
+   Add 'Instruction' for the menu
+   Add 'life potion' and 'spark powerup' for the game
+   Add 'Brush' mode for the hand cursor
+   In 'Brush' mode, draw a circle around kirby will trigger spark shield

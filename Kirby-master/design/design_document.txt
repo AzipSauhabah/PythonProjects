@@ -1,0 +1,66 @@
+# Design
+
+Module Explanation:
+- main.py
+  The main file that incorporates all other modules.
+  Execute this file to run the game.
+
+- kirby.py
+  This module includes the kirby class, which has different movement
+  functions.
+
+- enemies.py
+  This module includes different enemy classes. Each class has its own
+  movement function and properties. The instances will be created in
+  the mainloop function.
+
+- handCursor.py
+  This module contains a class of the hand cursor. The most important
+  function is the cursor function that contains different controls and
+  transformation into different modes and states. Ohter functions like
+  'drag' and 'drawCircle' are helper functions that implement the 'drag'
+  mode and 'draw' mode.
+
+- landscape.py
+  This module loads the background for the game. The background will
+  repeat itself over and over again.
+
+- meunu.py
+  This module creates the menu for the game.
+
+- subscreen.py
+  This module creates the subscreen menu for the game.
+
+- powerup.py
+  This module contains 2 classes: potion and spark. Each class has its
+  own movement functions. The instances will be created in the mainloop.
+
+- spriteGroup.py
+  This module contains the spriteGroup class that stores different sprite
+  groups for checking the collision.
+
+- block.py
+  This module creates rect for different objects to check collisions. The
+  instances will be created in the kirby class and enemy classes.
+
+- load.py
+  This is a helper module to load different resources from the 'data'
+  directory. It can load images, sounds, music and fonts.
+
+
+User Interface:
+    1. Menu
+       The background picture will according different selection, and
+       the selections can wraparound. The menu is very typical, nothing
+       special.
+
+    2. Game
+       The game is not a typical side scrolling game. You can not control
+       the main character itself. Your job is to use your keyboard and
+       and mouse to protect your kirby.
+       
+       The reason that I use this kind of control is that most side
+       scrolling games have little interaction between the character
+       and your mouse. The control might be a little harder but the game
+       will be much more fun and users will feel more involed in this
+       game.

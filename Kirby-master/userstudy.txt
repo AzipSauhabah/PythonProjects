@@ -1,0 +1,13 @@
+User Study Notes:
+
+1. Even though it's very interesting to play with both keyboards
+and mouse, but the controls are quite complicated and very confusing
+sometimes.
+
+2. The game is a little bit difficult at first, you should lower the
+density of your enemies at first and increase density afterwards.
+
+3. You should add more items like potions and other powerups.
+
+4. Your controls aren't working well sometimes after entering the
+subscreen menu.

@@ -1,0 +1,14 @@
+Updates:
+1) Add 4 enemies: pikey, Shotzo, Waddle Dee, WaddleDoo, and each enemy has its own movements
+
+2) Add spark shield for Kirby. Press "Space" button to activate.
+
+3) Add invincible state for Kirby. Every time Kirby is damaged, it will enter the invincible state, in which Kirby will flash for several seconds.
+
+4) Add fist mode for the hand cursor. Press the mouse's right button, the hand will change into a fist and hit the ground.
+
+5) Add "Pause", "Continue" and "Restart"
+
+6) Add double jump for Kirby
+
+7) Add a menu and game background
