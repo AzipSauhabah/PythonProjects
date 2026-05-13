@@ -3,6 +3,9 @@ __author__ = 'azipSauhabah'
 import os
 import pygame as pg
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+RESOURCE_DIR = os.path.join(BASE_DIR, "..", "resources")
+
 keybinding = {
     'action':pg.K_s,
     'jump':pg.K_a,
@@ -109,7 +112,7 @@ class _State(object):
 
 def load_all_gfx(directory, colorkey=(255,0,255), accept=('.png', 'jpg', 'bmp')):
     graphics = {}
-    graphx_directory = os.path.join(os.getcwd(), "Mario-Level-1-master","resources", "graphics") 
+    graphx_directory = os.path.join(RESOURCE_DIR, "graphics")
     for pic in os.listdir(graphx_directory):
         name, ext = os.path.splitext(pic)
         if ext.lower() in accept:
@@ -125,7 +128,7 @@ def load_all_gfx(directory, colorkey=(255,0,255), accept=('.png', 'jpg', 'bmp'))
 
 def load_all_music(directory, accept=('.wav', '.mp3', '.ogg', '.mdi')):
     songs = {}
-    music_directory = os.path.join(os.getcwd(), "Mario-Level-1-master","resources", "music") 
+    music_directory = os.path.join(RESOURCE_DIR, "music")
     for song in os.listdir(music_directory):
         name,ext = os.path.splitext(song)
         if ext.lower() in accept:
@@ -134,13 +137,13 @@ def load_all_music(directory, accept=('.wav', '.mp3', '.ogg', '.mdi')):
 
 
 def load_all_fonts(directory, accept=('.ttf')):
-    fonts_directory = os.path.join(os.getcwd(), "Mario-Level-1-master","resources", "fonts") 
+    fonts_directory = os.path.join(RESOURCE_DIR, "fonts")
     return load_all_music(fonts_directory, accept)
 
 
 def load_all_sfx(directory, accept=('.wav','.mpe','.ogg','.mdi')):
     effects = {}
-    sound_directory = os.path.join(os.getcwd(), "Mario-Level-1-master","resources", "sound") 
+    sound_directory = os.path.join(RESOURCE_DIR, "sound")
     for fx in os.listdir(sound_directory):
         name, ext = os.path.splitext(fx)
         if ext.lower() in accept:
