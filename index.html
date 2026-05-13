@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Game Projects — AzipSauhabah</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #0a0a0f;
+      --dark: #10101a;
+      --panel: #141422;
+      --border: #2a2a4a;
+      --neon-cyan: #00f5ff;
+      --neon-pink: #ff0090;
+      --neon-yellow: #ffe600;
+      --neon-green: #00ff88;
+      --neon-purple: #bf00ff;
+      --text: #e8e8ff;
+      --text-dim: #7070a0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* ── SCANLINES overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.18) 2px,
+        rgba(0,0,0,0.18) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── GRID background ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,245,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 80px 20px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .insert-coin {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: var(--neon-yellow);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      animation: blink 1.2s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    h1 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(18px, 4vw, 42px);
+      line-height: 1.6;
+      color: var(--neon-cyan);
+      text-shadow:
+        0 0 10px var(--neon-cyan),
+        0 0 40px rgba(0,245,255,0.5),
+        0 0 80px rgba(0,245,255,0.2);
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      padding: 6px 12px;
+      border: 1px solid currentColor;
+      letter-spacing: 1px;
+    }
+    .badge.python { color: var(--neon-green); border-color: var(--neon-green); }
+    .badge.pygame { color: var(--neon-pink); border-color: var(--neon-pink); }
+    .badge.games  { color: var(--neon-yellow); border-color: var(--neon-yellow); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .stat {
+      flex: 1;
+      max-width: 200px;
+      padding: 24px 20px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 24px;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 20px var(--neon-cyan);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 9px;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      position: relative;
+      z-index: 10;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: var(--neon-pink);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 50px 20px 40px;
+    }
+
+    .section-title::before,
+    .section-title::after {
+      content: '//';
+      color: var(--border);
+      margin: 0 16px;
+    }
+
+    /* ── GAMES GRID ── */
+    .games-grid {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .game-card {
+      background: var(--panel);
+      padding: 32px 28px;
+      transition: background 0.2s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--card-color, var(--neon-cyan));
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.25s ease;
+    }
+
+    .game-card:hover {
+      background: #1a1a2e;
+    }
+
+    .game-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .game-card:hover .game-title {
+      color: var(--card-color, var(--neon-cyan));
+      text-shadow: 0 0 12px var(--card-color, var(--neon-cyan));
+    }
+
+    .game-number {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+    }
+
+    .game-icon {
+      font-size: 36px;
+      line-height: 1;
+    }
+
+    .game-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 12px;
+      color: var(--text);
+      letter-spacing: 1px;
+      line-height: 1.6;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+
+    .game-desc {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    .game-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .tag {
+      font-size: 9px;
+      padding: 3px 8px;
+      border: 1px solid var(--card-color, var(--neon-cyan));
+      color: var(--card-color, var(--neon-cyan));
+      opacity: 0.7;
+      letter-spacing: 1px;
+    }
+
+    .game-cmd {
+      font-size: 10px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--card-color, var(--neon-cyan));
+      padding: 8px 12px;
+      color: var(--neon-green);
+      word-break: break-all;
+    }
+
+    /* ── INSTALL SECTION ── */
+    .install-section {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .terminal {
+      background: #050508;
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--neon-cyan);
+    }
+
+    .terminal-bar {
+      background: var(--panel);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.red { background: #ff5f57; }
+    .dot.yellow { background: #febc2e; }
+    .dot.green { background: #28c840; }
+
+    .terminal-title {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-left: 8px;
+      letter-spacing: 2px;
+    }
+
+    .terminal-body {
+      padding: 28px 32px;
+      line-height: 2.2;
+    }
+
+    .t-line { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; }
+
+    .prompt { color: var(--neon-green); flex-shrink: 0; }
+    .cmd    { color: var(--text); }
+    .comment { color: var(--text-dim); font-style: italic; font-size: 11px; display: block; margin: 4px 0 12px 20px; }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 10;
+      border-top: 1px solid var(--border);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer-ascii {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: var(--border);
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      color: var(--neon-cyan);
+      text-decoration: none;
+      border: 1px solid var(--neon-cyan);
+      padding: 12px 24px;
+      letter-spacing: 1px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .github-link:hover {
+      background: var(--neon-cyan);
+      color: var(--black);
+    }
+
+    .footer-copy {
+      margin-top: 24px;
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .game-card {
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .game-card:nth-child(1)  { animation-delay: 0.05s; }
+    .game-card:nth-child(2)  { animation-delay: 0.10s; }
+    .game-card:nth-child(3)  { animation-delay: 0.15s; }
+    .game-card:nth-child(4)  { animation-delay: 0.20s; }
+    .game-card:nth-child(5)  { animation-delay: 0.25s; }
+    .game-card:nth-child(6)  { animation-delay: 0.30s; }
+    .game-card:nth-child(7)  { animation-delay: 0.35s; }
+    .game-card:nth-child(8)  { animation-delay: 0.40s; }
+    .game-card:nth-child(9)  { animation-delay: 0.45s; }
+    .game-card:nth-child(10) { animation-delay: 0.50s; }
+    .game-card:nth-child(11) { animation-delay: 0.55s; }
+    .game-card:nth-child(12) { animation-delay: 0.60s; }
+    .game-card:nth-child(13) { animation-delay: 0.65s; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 14px; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat { max-width: 50%; border-bottom: 1px solid var(--border); }
+      .terminal-body { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="insert-coin">▶ INSERT COIN TO PLAY ◀</div>
+  <h1>PYTHON<br>GAME PROJECTS</h1>
+  <p class="subtitle">by AzipSauhabah — 13 jeux classiques en Python</p>
+  <div class="badge-row">
+    <span class="badge python">Python 3.x</span>
+    <span class="badge pygame">Pygame</span>
+    <span class="badge games">13 Jeux</span>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-num">13</span>
+    <span class="stat-label">Jeux</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">90%</span>
+    <span class="stat-label">Python</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">1</span>
+    <span class="stat-label">Dev</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">∞</span>
+    <span class="stat-label">Fun</span>
+  </div>
+</div>
+
+<!-- GAMES -->
+<p class="section-title">LISTE DES JEUX</p>
+
+<div class="games-grid">
+
+  <div class="game-card" style="--card-color: #ff0090;">
+    <span class="game-number">01 / 13</span>
+    <div class="game-icon">🍄</div>
+    <div class="game-title">MARIO LEVEL 1</div>
+    <p class="game-desc">Recréation du premier niveau de Super Mario Bros. Plateformes, ennemis, champignons et tuyaux fidèles à l'original.</p>
+    <div class="game-tags">
+      <span class="tag">platformer</span>
+      <span class="tag">retro</span>
+    </div>
+    <code class="game-cmd">cd Mario-Level-1-master &amp;&amp; python mario_game.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #ff0090;">
+    <span class="game-number">02 / 13</span>
+    <div class="game-icon">🍄</div>
+    <div class="game-title">SUPER MARIO PYTHON</div>
+    <p class="game-desc">Version complète de Super Mario avec niveaux avancés, système de score et effets sonores.</p>
+    <div class="game-tags">
+      <span class="tag">platformer</span>
+      <span class="tag">multi-levels</span>
+    </div>
+    <code class="game-cmd">cd super-mario-python-master &amp;&amp; python main.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #00f5ff;">
+    <span class="game-number">03 / 13</span>
+    <div class="game-icon">👾</div>
+    <div class="game-title">PACMAN</div>
+    <p class="game-desc">Le classique de Namco. Mangez les pac-dots, évitez les fantômes, activez les power pellets.</p>
+    <div class="game-tags">
+      <span class="tag">arcade</span>
+      <span class="tag">maze</span>
+    </div>
+    <code class="game-cmd">cd Pacman-master &amp;&amp; python pacman.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #00ff88;">
+    <span class="game-number">04 / 13</span>
+    <div class="game-icon">🗡️</div>
+    <div class="game-title">ZELDA WITH PYTHON</div>
+    <p class="game-desc">Action-RPG inspiré de The Legend of Zelda. Exploration, combat à l'épée et donjons mystérieux.</p>
+    <div class="game-tags">
+      <span class="tag">RPG</span>
+      <span class="tag">action</span>
+    </div>
+    <code class="game-cmd">cd Zelda-with-Python-main &amp;&amp; python main.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #ffe600;">
+    <span class="game-number">05 / 13</span>
+    <div class="game-icon">🌀</div>
+    <div class="game-title">SONIC PYGAME</div>
+    <p class="game-desc">Le hérisson le plus rapide du monde en Python. Courez à toute vitesse, collectez des anneaux.</p>
+    <div class="game-tags">
+      <span class="tag">platformer</span>
+      <span class="tag">speed</span>
+    </div>
+    <code class="game-cmd">cd sonic-pygame &amp;&amp; python main.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #ff0090;">
+    <span class="game-number">06 / 13</span>
+    <div class="game-icon">🥊</div>
+    <div class="game-title">STREET FIGHTER</div>
+    <p class="game-desc">Jeu de combat 2D inspiré de Street Fighter. Coups spéciaux, combos et duels en un contre un.</p>
+    <div class="game-tags">
+      <span class="tag">fighting</span>
+      <span class="tag">2-player</span>
+    </div>
+    <code class="game-cmd">cd Street_Fighter_Game-master &amp;&amp; python main.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #bf00ff;">
+    <span class="game-number">07 / 13</span>
+    <div class="game-icon">🌸</div>
+    <div class="game-title">KIRBY</div>
+    <p class="game-desc">Le petit héros rose de Nintendo. Aspirez les ennemis, copiez leurs pouvoirs, sauvez Pop Star.</p>
+    <div class="game-tags">
+      <span class="tag">platformer</span>
+      <span class="tag">abilities</span>
+    </div>
+    <code class="game-cmd">cd Kirby-master &amp;&amp; python main.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #00f5ff;">
+    <span class="game-number">08 / 13</span>
+    <div class="game-icon">🧱</div>
+    <div class="game-title">PYTETRIS</div>
+    <p class="game-desc">L'incontournable Tetris en Python. Faites tomber les tétrominos, complétez des lignes, battez votre score.</p>
+    <div class="game-tags">
+      <span class="tag">puzzle</span>
+      <span class="tag">classic</span>
+    </div>
+    <code class="game-cmd">cd PyTetris-master &amp;&amp; python tetris.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #ffe600;">
+    <span class="game-number">09 / 13</span>
+    <div class="game-icon">🏎️</div>
+    <div class="game-title">OUTRUN</div>
+    <p class="game-desc">Course de voiture en pseudo-3D inspirée du classique Sega. Routes sinueuses et vitesse à couper le souffle.</p>
+    <div class="game-tags">
+      <span class="tag">racing</span>
+      <span class="tag">pseudo-3D</span>
+    </div>
+    <code class="game-cmd">cd OutRun-master &amp;&amp; python game.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #00ff88;">
+    <span class="game-number">10 / 13</span>
+    <div class="game-icon">🚀</div>
+    <div class="game-title">R-TYPO</div>
+    <p class="game-desc">Shoot'em up horizontal inspiré de R-Type. Vaisseaux extraterrestres, power-ups et boss épiques.</p>
+    <div class="game-tags">
+      <span class="tag">shoot'em up</span>
+      <span class="tag">space</span>
+    </div>
+    <code class="game-cmd">cd R-Typo-master &amp;&amp; python main.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #bf00ff;">
+    <span class="game-number">11 / 13</span>
+    <div class="game-icon">⚔️</div>
+    <div class="game-title">METAL PYTHON</div>
+    <p class="game-desc">Action game inspiré de Metal Slug. Run and gun frénétique avec des effets d'explosion spectaculaires.</p>
+    <div class="game-tags">
+      <span class="tag">action</span>
+      <span class="tag">run & gun</span>
+    </div>
+    <code class="game-cmd">cd MetalPython-master &amp;&amp; python main.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #ff0090;">
+    <span class="game-number">12 / 13</span>
+    <div class="game-icon">🔮</div>
+    <div class="game-title">ROYAL ORDAINS</div>
+    <p class="game-desc">Jeu de stratégie médiéval fantastique. Commandez vos armées, gérez vos ressources, conquérez des royaumes.</p>
+    <div class="game-tags">
+      <span class="tag">strategy</span>
+      <span class="tag">fantasy</span>
+    </div>
+    <code class="game-cmd">cd Royal-Ordains-main &amp;&amp; python main.py</code>
+  </div>
+
+  <div class="game-card" style="--card-color: #00f5ff;">
+    <span class="game-number">13 / 13</span>
+    <div class="game-icon">🌐</div>
+    <div class="game-title">REALTIME 3D</div>
+    <p class="game-desc">Démonstration de rendu 3D temps réel en pur Python. Moteur 3D maison, rotations et projections.</p>
+    <div class="game-tags">
+      <span class="tag">3D</span>
+      <span class="tag">engine</span>
+    </div>
+    <code class="game-cmd">cd RealTime3DwithPython-master &amp;&amp; python main.py</code>
+  </div>
+
+</div>
+
+<!-- INSTALL -->
+<div class="install-section">
+  <p class="section-title" style="padding-top: 0;">INSTALLATION</p>
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <span class="terminal-title">bash — python-games</span>
+    </div>
+    <div class="terminal-body">
+      <div class="t-line">
+        <span class="prompt">$</span>
+        <span class="cmd">git clone https://github.com/AzipSauhabah/PythonProjects.git</span>
+      </div>
+      <span class="comment"># Cloner le dépôt</span>
+      <div class="t-line">
+        <span class="prompt">$</span>
+        <span class="cmd">cd PythonProjects</span>
+      </div>
+      <span class="comment"># Accéder au dossier</span>
+      <div class="t-line">
+        <span class="prompt">$</span>
+        <span class="cmd">pip install pygame</span>
+      </div>
+      <span class="comment"># Installer Pygame (requis pour tous les jeux)</span>
+      <div class="t-line">
+        <span class="prompt">$</span>
+        <span class="cmd">cd Pacman-master &amp;&amp; python pacman.py</span>
+      </div>
+      <span class="comment"># Exemple : lancer Pacman</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-ascii">▓▓▓░░░░░▓▓▓░░░░░▓▓▓░░░░░▓▓▓</div>
+  <a class="github-link" href="https://github.com/AzipSauhabah/PythonProjects" target="_blank">
+    ⬡ VOIR SUR GITHUB
+  </a>
+  <p class="footer-copy">© 2026 AzipSauhabah — All games powered by Python &amp; Pygame</p>
+</footer>
+
+</body>
+</html>
