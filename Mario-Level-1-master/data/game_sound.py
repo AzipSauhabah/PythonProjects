@@ -12,7 +12,7 @@ class Sound(object):
         self.music_dict = setup.MUSIC
         self.overhead_info = overhead_info
         self.game_info = overhead_info.game_info
-        self.set_music_mixer()
+        pass
 
 
 
