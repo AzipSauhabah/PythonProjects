@@ -22,10 +22,8 @@ async def main():
 
     run_it.setup_states(state_dict, c.MAIN_MENU)
 
-    # boucle compatible navigateur
-    while True:
-        run_it.main()
-        await asyncio.sleep(0)
+    # UNE seule fois
+    run_it.main()
 
 
 asyncio.run(main())
