@@ -67,18 +67,18 @@ class Control(object):
             if not self.show_fps:
                 pg.display.set_caption(self.caption)
 
-
+    
     def main(self):
-        """Main loop for entire program"""
-        while not self.done:
-            self.event_loop()
-            self.update()
-            pg.display.update()
-            self.clock.tick(self.fps)
-            if self.show_fps:
-                fps = self.clock.get_fps()
-                with_fps = "{} - {:.2f} FPS".format(self.caption, fps)
-                pg.display.set_caption(with_fps)
+        """One frame update for web compatibility"""
+        self.event_loop()
+        self.update()
+        pg.display.update()
+        self.clock.tick(self.fps)
+    
+        if self.show_fps:
+            fps = self.clock.get_fps()
+            with_fps = "{} - {:.2f} FPS".format(self.caption, fps)
+            pg.display.set_caption(with_fps)
 
 
 class _State(object):
