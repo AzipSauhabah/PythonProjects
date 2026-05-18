@@ -47,8 +47,7 @@ python mario_level_1.py
 
 ## 🌐 Web Version
 
-These games are also playable directly in the browser (JavaScript Canvas port) at:  
-**https://games.sauhabah-advisory.eu**
+under construction
 
 ---
 
