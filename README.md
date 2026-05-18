@@ -1,128 +1,78 @@
-# Python Projects - Games 🎮
+# Python Projects — Games 🎮
 
-Bienvenue dans **Python Projects**, un dépôt dédié aux jeux développés en **Python** ! Ce projet rassemble une collection de jeux classiques créés à l'aide de **Pygame** et d'autres bibliothèques Python. Chaque jeu a été conçu pour renforcer mes compétences en programmation tout en explorant des concepts amusants.
+A collection of classic games developed in **Python** using **Pygame**.  
+Each game was built as a programming exercise to explore game development concepts.
 
-🔧 **Technologies utilisées** :
-- **Python 3.x**
-- **Pygame**
-
----
-
-## 🕹️ Liste des jeux
-
-Voici la liste complète des jeux inclus dans ce dépôt :
-
-- **Kirby**
-- **Mario Level 1**
-- **Metal Python**
-- **OutRun**
-- **Pacman**
-- **PyTetris**
-- **R-Typo**
-- **RealTime3D with Python**
-- **Royal Ordains**
-- **Street Fighter**
-- **Zelda with Python**
-- **Sonic Pygame**
-- **Super Mario Python**
+🔧 **Technologies** : Python 3.x · Pygame
 
 ---
 
-## 📸 Aperçu des jeux
+## 🕹️ Games
 
-![Mario](https://upload.wikimedia.org/wikipedia/commons/0/0b/Mario_bros_logo.svg)  
-*Mario Level 1*
-
-![Pacman](https://upload.wikimedia.org/wikipedia/commons/4/47/Pac-Man_Logo.svg)  
-*Pacman*
-
-![Zelda](https://upload.wikimedia.org/wikipedia/commons/d/d4/Zelda_Logo.svg)  
-*Zelda with Python*
+| Game | Folder |
+|---|---|
+| Mario Level 1 | `Mario-Level-1-master` |
+| Super Mario Python | `super-mario-python-master` |
+| Pacman | `Pacman-master` |
+| Zelda with Python | `Zelda-with-Python-main` |
+| Street Fighter | `Street_Fighter_Game-master` |
+| Sonic Pygame | `sonic-pygame` |
+| PyTetris | `PyTetris-master` |
+| OutRun | `OutRun-master` |
+| Kirby | `Kirby-master` |
+| R-Typo | `R-Typo-master` |
+| Metal Python | `MetalPython-master` |
+| Royal Ordains | `Royal-Ordains-main` |
+| RealTime 3D with Python | `RealTime3DwithPython-master` |
 
 ---
 
-## ⚙️ Prérequis
-
-Avant de commencer à jouer, vous devez installer les bibliothèques suivantes :
-
-- **Python 3.x** : [Télécharger Python](https://www.python.org/downloads/)
-- **Pygame** : Utilisez la commande ci-dessous pour installer **Pygame**.
+## ⚙️ Requirements
 
 ```bash
 pip install pygame
-
-🚀 Lancer les jeux
-
-1. Clonez le dépôt sur votre machine locale :
-git clone https://github.com/AzipSauhabah/PythonProjects.git
-
-2. Naviguez vers le dossier du jeu que vous souhaitez lancer :
-
-Par exemple, pour jouer à Mario Level 1 :
-cd PythonProjects/Mario-Level-1-master
-
-3. Exécutez le script Python pour démarrer le jeu :
-python mario_game.py
-
-🛠️ Explication du Code
-Exemple : Mario Level 1
-Voici une vue d'ensemble du code de base pour démarrer un jeu comme Mario Level 1.
-
-import pygame
-
-# Initialisation de Pygame
-pygame.init()
-
-# Dimensions de la fenêtre du jeu
-screen = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("Mario Level 1")
-
-# Boucle de jeu
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # Mettre à jour l'affichage
-    screen.fill((255, 255, 255))  # Remplir l'écran de blanc
-    pygame.display.update()
-
-pygame.quit()
-
 ```
-##  Explication :
 
-- **Initialisation : Le module Pygame est initialisé avec pygame.init().
+---
 
-- **Fenêtre du jeu : Nous créons une fenêtre avec les dimensions 800x600 pixels en utilisant pygame.display.set_mode().
+## 🚀 Run a game
 
-- **Boucle principale : Le jeu s'exécute dans une boucle infinie (while running:), où il écoute les événements comme la fermeture de la fenêtre.
+```bash
+git clone https://github.com/AzipSauhabah/PythonProjects.git
+cd PythonProjects/Mario-Level-1-master
+python mario_level_1.py
+```
 
-- ** Mise à jour de l'affichage : À chaque itération de la boucle, l'écran est rempli de blanc et la fenêtre est mise à jour avec pygame.display.update().
+---
 
-📝 Contributions
-Si vous avez des suggestions, des améliorations ou des corrections à proposer, n'hésitez pas à soumettre une pull request !
+## 🌐 Web Version
 
-👤 Auteurs
-AzipSauhabah - Développeur principal du projet
+These games are also playable directly in the browser (JavaScript Canvas port) at:  
+**https://games.sauhabah-advisory.eu**
 
-📜 Licence
-Ce projet est sous la licence MIT. Voir le fichier LICENSE pour plus d'informations.
+---
 
-🔗 Liens utiles
-- **Documentation Pygame
-- ** Python 3.x
+## ⚠️ Legal Disclaimer
 
-💬 Contact
-Pour toute question, contactez-moi via mon profil GitHub
+The games in this repository are **non-commercial, educational fan recreations** of classic video games.
 
-### Ce README comprend maintenant :
+- **Super Mario Bros.** — © Nintendo Co., Ltd.
+- **Pac-Man** — © Bandai Namco Entertainment
+- **The Legend of Zelda** — © Nintendo Co., Ltd.
+- **Sonic the Hedgehog** — © Sega Corporation
+- **Street Fighter** — © Capcom Co., Ltd.
+- **Kirby** — © Nintendo / HAL Laboratory
 
-- **Tous les jeux** de votre projet, bien détaillés sous la section "Liste des jeux".
-- **Instructions pour lancer** chaque jeu, y compris la partie pour cloner le dépôt, naviguer dans le dossier du jeu, et exécuter les scripts Python.
-- **Exemple de code** avec une explication détaillée pour comprendre comment les jeux sont lancés et structurés (exemple avec **Mario Level 1**).
-- **Liens utiles** pour aider l'utilisateur à installer **Pygame** et **Python**, ainsi que des ressources supplémentaires.
-- **Section de contributions** et des informations de contact.
+All original game assets, characters, and trademarks belong to their respective owners.  
+This project is not affiliated with, sponsored or endorsed by any of the above companies.  
+It is provided solely for **educational and personal use**, with no commercial intent.
 
-Cela permet à vos utilisateurs de rapidement comprendre comment interagir avec votre dépôt et commencer à jouer à vos projets ! Si vous avez d'autres questions ou ajustements à faire, je suis là pour aider.
+If you are a rights holder and wish to request removal of any content,  
+it will be taken down immediately upon request.
+
+---
+
+## 📜 License
+
+Source code (Python) : MIT License  
+Game assets : property of their respective owners (see disclaimer above)
