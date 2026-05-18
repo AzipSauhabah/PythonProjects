@@ -1,16 +1,23 @@
 import asyncio
 import pygame
 
-from data import setup, tools
-from data.states import main_menu, load_screen, level1
-from data import constants as c
-
-
 async def main():
-
     pygame.init()
 
-    run_it = tools.Control(setup.ORIGINAL_CAPTION)
+    import os
+    os.environ['SDL_VIDEO_CENTERED'] = '1'
+
+    from data import tools, constants as c
+    from data.states import main_menu, load_screen, level1
+
+    pygame.display.set_caption(c.ORIGINAL_CAPTION)
+    screen = pygame.display.set_mode(c.SCREEN_SIZE)
+
+    from data import setup
+    setup.SCREEN = screen
+    setup.SCREEN_RECT = screen.get_rect()
+
+    run_it = tools.Control(c.ORIGINAL_CAPTION)
 
     state_dict = {
         c.MAIN_MENU: main_menu.Menu(),
@@ -25,6 +32,5 @@ async def main():
     while not run_it.done:
         run_it.main()
         await asyncio.sleep(0)
-
 
 asyncio.run(main())
